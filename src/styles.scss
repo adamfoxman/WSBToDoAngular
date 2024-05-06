@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 20px 0 20px;
+  max-width: 1800px;
+  max-height: calc(100vh - 100px);
+  width: auto;
+
+  content {
+    height: auto;
+    overflow: auto;
+  }
+}
