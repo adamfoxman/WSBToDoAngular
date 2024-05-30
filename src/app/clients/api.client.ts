@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -69,8 +69,10 @@ export class AuthClient {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/api/auth/login`, { email, password });
+  login(email: string, password: string): Observable<HttpResponse<any>> {
+    return this.http.post(`${this.apiUrl}/api/auth/login`, { email, password }, {
+      observe: 'response',
+    });
   }
 
   logout(): Observable<string> {

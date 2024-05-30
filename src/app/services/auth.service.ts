@@ -20,6 +20,7 @@ export class AuthService {
   }
 
   decodeToken(token: string): any {
+    console.log(token);
     return JSON.parse(atob(token.split('.')[1]));
   }
 }
