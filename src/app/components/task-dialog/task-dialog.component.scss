@@ -1,0 +1,30 @@
+.dialog-form {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  min-width: 500px;
+  max-width: 1000px;
+  width: 100%;
+
+  .mat-mdc-tab-body-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mat-mdc-form-field,
+  .app-form-field {
+    flex: 1;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    gap: 1em;
+  }
+
+  mat-tab-group {
+    height: 65vh;
+  }
+}

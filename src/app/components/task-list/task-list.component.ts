@@ -3,6 +3,8 @@ import { AppMaterialModule } from "../../material.module";
 import { MatTableDataSource } from "@angular/material/table";
 import { Priority, TaskClient, TaskDto } from "../../clients/api.client";
 import { DatePipe } from "@angular/common";
+import { MatDialog } from "@angular/material/dialog";
+import { TaskDialogComponent } from "../task-dialog/task-dialog.component";
 
 @Component({
   selector: 'app-task-list',
@@ -23,10 +25,12 @@ export class TaskListComponent implements OnInit {
     'dueDate',
     'done',
     'priority',
+    'edit'
   ]
 
   constructor(
     private taskClient: TaskClient,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -63,6 +67,12 @@ export class TaskListComponent implements OnInit {
           description: 'This is a test task'
         }
       ]
+    });
+  }
+
+  editTask(task: TaskDto) {
+    this.dialog.open(TaskDialogComponent, {
+      data: task
     });
   }
 }

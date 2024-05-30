@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>
+  {{ task ? 'Edit task' : 'Add task' }}
+</h2>
+<mat-dialog-content class="mat-typography dialog-form">
+  <form [formGroup]="taskForm">
+    <div class="row">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Title" formControlName="title" required>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class=full-width>
+        <mat-select formControlName="done">
+          <mat-option [value]="true">Done</mat-option>
+          <mat-option [value]="false">Not done</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Due date" formControlName="dueDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-select formControlName="priority">
+          @for (priority of Object.values(Priority); track priority) {
+            <mat-option [value]="priority">{{ priority }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button (click)="saveTask()" [disabled]="taskForm.invalid">{{ task ? 'Save' : 'Add' }}</button>
+</mat-dialog-actions>

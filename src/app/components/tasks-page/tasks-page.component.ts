@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { AppMaterialModule } from "../../material.module";
 import { MatTableDataSource } from "@angular/material/table";
-import { TaskDto, TaskClient } from "../../clients/api.client";
-import { UserService } from "../../services/user.service";
+import { TaskClient, TaskDto } from "../../clients/api.client";
 import { map } from "rxjs";
 import { TaskListComponent } from "../task-list/task-list.component";
+import { MatDialog } from "@angular/material/dialog";
+import { TaskDialogComponent } from "../task-dialog/task-dialog.component";
 
 @Component({
   selector: 'app-tasks-page',
@@ -25,10 +26,15 @@ export class TasksPageComponent {
 
   constructor(
     private taskClient: TaskClient,
+    private dialog: MatDialog
   ) {
     this.taskDataSource = new MatTableDataSource<TaskDto>();
     this.tasks$.subscribe(tasks => {
       this.taskDataSource.data = tasks;
     });
+  }
+
+  addTask() {
+    this.dialog.open(TaskDialogComponent);
   }
 }
