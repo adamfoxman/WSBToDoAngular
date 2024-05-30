@@ -5,6 +5,7 @@ import { Priority, TaskClient, TaskDto } from "../../clients/api.client";
 import { DatePipe } from "@angular/common";
 import { MatDialog } from "@angular/material/dialog";
 import { TaskDialogComponent } from "../task-dialog/task-dialog.component";
+import { tap } from "rxjs";
 
 @Component({
   selector: 'app-task-list',
@@ -25,7 +26,7 @@ export class TaskListComponent implements OnInit {
     'dueDate',
     'done',
     'priority',
-    'edit'
+    'actions'
   ]
 
   constructor(
@@ -40,7 +41,7 @@ export class TaskListComponent implements OnInit {
     }, (error) => {
       this.tasks.data = [
         {
-          id: '1',
+          _id: '1',
           title: 'Task 1',
           dueDate: new Date(),
           done: false,
@@ -49,7 +50,7 @@ export class TaskListComponent implements OnInit {
           description: 'This is a test task'
         },
         {
-          id: '2',
+          _id: '2',
           title: 'Task 2',
           dueDate: new Date(),
           done: false,
@@ -58,7 +59,7 @@ export class TaskListComponent implements OnInit {
           description: 'This is a test task'
         },
         {
-          id: '3',
+          _id: '3',
           title: 'Task 3',
           dueDate: new Date(),
           done: false,
@@ -73,6 +74,17 @@ export class TaskListComponent implements OnInit {
   editTask(task: TaskDto) {
     this.dialog.open(TaskDialogComponent, {
       data: task
+    }).afterClosed().pipe(tap(() => {
+      this.taskClient.getAllTasks().subscribe((tasks) => {
+        this.tasks.data = tasks.tasks;
+      });
+    }));
+  }
+
+  deleteTask(task: TaskDto) {
+    this.taskClient.deleteTask(task._id).subscribe(() => {
+      console.log('Task deleted');
+      this.tasks.data = this.tasks.data.filter(t => t._id !== task._id);
     });
   }
 }

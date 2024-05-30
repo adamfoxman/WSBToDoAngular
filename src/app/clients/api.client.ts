@@ -144,7 +144,7 @@ export interface RegisterUser extends BaseUser {
 // --------------------------------------------------------------
 
 export interface TaskDto extends Task {
-  id: string;
+  _id: string;
 }
 
 export interface TaskListDto {
