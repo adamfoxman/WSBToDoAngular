@@ -14,14 +14,26 @@
         <span>WSB ToDo App</span>
       </div>
       <div class="navbar__container">
+        <span>{{ user?.name }}</span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>logout</mat-icon>
-            Logout
-          </button>
+          @if (!user) {
+            <button mat-menu-item routerLink="/login">
+              <mat-icon>login</mat-icon>
+              Login
+            </button>
+            <button mat-menu-item routerLink="/register">
+              <mat-icon>person_add</mat-icon>
+              Register
+            </button>
+          } @else {
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              Logout
+            </button>
+          }
         </mat-menu>
       </div>
     </mat-toolbar>

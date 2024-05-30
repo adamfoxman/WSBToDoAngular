@@ -76,7 +76,7 @@ export class AuthClient {
   }
 
   logout(): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/api/auth/logout`, {});
+    return this.http.get<string>(`${this.apiUrl}/api/auth/logout`, {});
   }
 
   register(user: RegisterUser): Observable<string> {
