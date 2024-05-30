@@ -72,7 +72,8 @@
               "buildTarget": "WSBToDoAngular:build:production"
             },
             "development": {
-              "buildTarget": "WSBToDoAngular:build:development"
+              "buildTarget": "WSBToDoAngular:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
