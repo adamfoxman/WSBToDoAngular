@@ -1,3 +1,3 @@
 export const environment = {
-  api: 'http://localhost:4200',
-}
+  api: 'http://localhost:3000',
+};
