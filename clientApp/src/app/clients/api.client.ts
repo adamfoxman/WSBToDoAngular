@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
@@ -8,79 +8,106 @@ import { environment } from '../environments/environment';
 // --------------------------------------------------------------
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskClient {
   private apiUrl = environment.api;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<TaskListDto> {
-    return this.http.get<TaskListDto>(`${this.apiUrl}/api/tasks/all`);
+    return this.http.get<TaskListDto>(`${this.apiUrl}/api/tasks/all`, {
+      withCredentials: true,
+    });
   }
 
   addTask(task: Task): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/api/tasks/add`, task);
+    return this.http.post<string>(`${this.apiUrl}/api/tasks/add`, task, {
+      withCredentials: true,
+    });
   }
 
   updateTask(task: Task): Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/api/tasks/update`, task);
+    return this.http.put<string>(`${this.apiUrl}/api/tasks/update`, task, {
+      withCredentials: true,
+    });
   }
 
   deleteTask(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/api/tasks/delete/${id}`);
+    return this.http.delete<string>(`${this.apiUrl}/api/tasks/delete/${id}`, {
+      withCredentials: true,
+    });
   }
 
   getTaskById(id: string): Observable<TaskDto> {
-    return this.http.get<TaskDto>(`${this.apiUrl}/api/tasks/${id}`);
+    return this.http.get<TaskDto>(`${this.apiUrl}/api/tasks/${id}`, {
+      withCredentials: true,
+    });
   }
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserClient {
   private apiUrl = environment.api;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<UserListDto> {
-    return this.http.get<UserListDto>(`${this.apiUrl}/api/users/all`);
+    return this.http.get<UserListDto>(`${this.apiUrl}/api/users/all`, {
+      withCredentials: true,
+    });
   }
 
   addUser(user: CreateUser): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/api/users/add`, user);
+    return this.http.post<string>(`${this.apiUrl}/api/users/add`, user, {
+      withCredentials: true,
+    });
   }
 
   updateUser(user: User): Observable<string> {
-    return this.http.put<string>(`${this.apiUrl}/api/users/update`, user);
+    return this.http.put<string>(`${this.apiUrl}/api/users/update`, user, {
+      withCredentials: true,
+    });
   }
 
   deleteUser(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/api/users/delete/${id}`);
+    return this.http.delete<string>(`${this.apiUrl}/api/users/delete/${id}`, {
+      withCredentials: true,
+    });
   }
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthClient {
   private apiUrl = environment.api;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<HttpResponse<any>> {
-    return this.http.post(`${this.apiUrl}/api/auth/login`, { email, password }, {
-      observe: 'response',
-    });
+    return this.http.post(
+      `${this.apiUrl}/api/auth/login`,
+      { email, password },
+      {
+        observe: 'response',
+        withCredentials: true,
+      },
+    );
   }
 
   logout(): Observable<string> {
-    return this.http.get<string>(`${this.apiUrl}/api/auth/logout`, {});
+    return this.http.get<string>(`${this.apiUrl}/api/auth/logout`, {
+      withCredentials: true,
+    });
   }
 
   register(user: RegisterUser): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/api/auth/register`, user);
+    return this.http.post<string>(`${this.apiUrl}/api/auth/register`, user, {
+      withCredentials: true,
+    });
   }
 }
 
@@ -158,5 +185,3 @@ export interface UserDto extends BaseUser {
 export interface UserListDto {
   users: UserDto[];
 }
-
-
