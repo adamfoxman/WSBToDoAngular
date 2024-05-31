@@ -24,7 +24,13 @@ export class UserService {
     private authService: AuthService,
     private cookieService: CookieService,
     private router: Router,
-  ) {}
+  ) {
+    const token = this.cookieService.get('ExpressGeneratorTs');
+    if (token) {
+      const user = this.authService.decodeToken(token);
+      this.user$.next(user);
+    }
+  }
 
   login(email: string, password: string) {
     this.authClient
