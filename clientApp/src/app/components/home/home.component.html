@@ -2,7 +2,9 @@
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item routerLink="/tasks">Tasks</a>
+      @if (isAuthenticated){
+        <a mat-list-item routerLink="/tasks">Tasks</a>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
